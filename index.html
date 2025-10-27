@@ -8,6 +8,13 @@
   
     <title>Ingersoll Rand Brand Test</title>
     <!--<script type="text/javascript" src="jquery-3.3.1.min.js">-->
+	  <script type="text/javascript">
+         var userLang = navigator.language || navigator.userLanguage; 
+		 var root = window;
+		 var rootLang = root.navigator.languages || [root.navigator.language || root.navigator.userLanguage];
+         alert ("The language is: " + userLang + " rootLang is: " + rootLang);
+      </script>
+
 
 
 <style>
@@ -19,7 +26,7 @@
    }
    .gen-callback-customer-logo {
     display: block;
-    width: 337px;
+    width: 340px;
     height: 96px;
     background: url(ir-logo-v1.webp) no-repeat center;
    }
