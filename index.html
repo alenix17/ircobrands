@@ -62,22 +62,36 @@
 
 	<fieldset>
 	<br></br>
-	<legend>Brand Information</legend>
+	<legend>Brand Data Input</legend>
       <label for="brand">Brand: </label>
       <input id="brand" type="text" name="brand" value="" size="30" maxlength="30" />
 	<br></br>
 	  <label for="geolocation">geolocation: </label>
       <input id="geolocation" type="text" name="geolocation" value="" size="30" maxlength="30" />
 	<br></br>
-      <label for="locale">Locale: </label>
-      <input id="locale" type="text" name="locale" value="" size="30" maxlength="30" />
+      <label for="locale">Browser Locale: </label>
+      <input id="locale" type="text" name="locale" value=userLang size="30" maxlength="30" />
 	<br></br>
-	  <div>
-    <input type="radio" id="false" name="override" value="dewey" />
+	<br></br>
+      <label for="supplocale">Browser Supported Locale: </label>
+      <input id="supplocale" type="text" name="supplocale" value=rootLang size="30" maxlength="30" />
+	<br></br>
+	<br></br>
+      <label for="pagelocale">Page Locale: </label>
+      <input id="pagelocale" type="text" name="pagelocale" value=pageLang size="30" maxlength="30" />
+	<br></br>
+    </fieldset>
+	
+	<fieldset>
+	<br></br>
+	<legend>Override Language: </legend>
+
+	<div>
+    <input type="radio" id="false" name="override" value="false" checked/>
     <label for="false">False</label>
   </div>
   <div>
-    <input type="radio" id="true" name="override" value="louie" />
+    <input type="radio" id="true" name="override" value="true" />
     <label for="true">True</label>
   </div>
     </fieldset>
