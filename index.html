@@ -15,6 +15,9 @@
 		 var rootLang = root.navigator.languages || [root.navigator.language || root.navigator.userLanguage];
          var pageLang = html.getAttribute('lang');
          alert ("Default browser language is: " + bwLang + " supportedLang is: " + rootLang + " pageLang is: " + pageLang);
+		 document.getElementById("locale").innerText = bwLang;
+ 		 document.getElementById("pagelocale").innerText = pageLang;
+ 		 document.getElementById("supplocale").innerText = rootLang;
       </script>
 
 
@@ -67,18 +70,18 @@
       <input id="brand" type="text" name="brand" value="" size="30" maxlength="30" />
 	<br></br>
 	  <label for="geolocation">geolocation: </label>
-      <input id="geolocation" type="text" name="geolocation" value="" size="30" maxlength="30" />
+      <input id="geolocation" type="text" name="geolocation" size="30" maxlength="30" />
 	<br></br>
       <label for="locale">Browser Locale: </label>
-      <input id="locale" type="text" name="locale" value=bwLang size="30" maxlength="30" />
+      <input id="locale" type="text" name="locale" size="30" maxlength="30" />
 	<br></br>
 	<br></br>
       <label for="supplocale">Browser Supported Locale: </label>
-      <input id="supplocale" type="text" name="supplocale" value=rootLang size="30" maxlength="30" />
+      <input id="supplocale" type="text" name="supplocale" size="30" maxlength="30" />
 	<br></br>
 	<br></br>
       <label for="pagelocale">Page Locale: </label>
-      <input id="pagelocale" type="text" name="pagelocale" value=pageLang size="30" maxlength="30" />
+      <input id="pagelocale" type="text" name="pagelocale" size="30" maxlength="30" />
 	<br></br>
     </fieldset>
 	
