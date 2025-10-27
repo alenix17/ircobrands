@@ -21,8 +21,8 @@ var v_customerPhone= "";
     g[e].c = es;
     ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
   })(window, 'Genesys', 'https://apps.mypurecloud.ie/genesys-bootstrap/genesys.min.js', {
-    environment: 'prod-euw1',
-    deploymentId: '31b61e00-9527-4a50-819e-9f13212cfeea',
+    environment: 'prod-euc2',
+    deploymentId: 'f93ec789-5ebc-4168-bf02-5fb1f4508bb3',
     debug: false
   });
 
