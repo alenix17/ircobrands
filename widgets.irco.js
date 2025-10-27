@@ -39,7 +39,7 @@ Genesys("subscribe", "Conversations.ready", function(){
     v_geolocation= cx_getElement("geolocation");
     v_language= cx_getElement("locale");
 	v_pagelanguage = cx_getElement("pagelocale");
-	v_override = cx_getElement("override");
+	v_override = cx_getElementByName("override");
 	v_supplanguage = cx_getElement("supplocale");
     Genesys("command", "Database.set", {
     messaging: { customAttributes:
