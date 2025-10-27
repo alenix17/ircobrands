@@ -111,8 +111,10 @@
   </body>
   <script type="text/javascript">
     let openMessenger = function () {
+	let loc = document.getElementById("locale").value;
     let elem = document.createElement("script");
     elem.setAttribute("type","text/javascript");
+	elem.setAttribute('lang',loc);
     elem.src = "./widgets.irco.js"
     document.head.appendChild(elem);
   }
