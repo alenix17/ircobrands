@@ -38,12 +38,18 @@ Genesys("subscribe", "Conversations.ready", function(){
     v_brand= cx_getElement("brand");
     v_geolocation= cx_getElement("geolocation");
     v_language= cx_getElement("locale");
+	v_pagelanguage = cx_getElement("pagelocale");
+	v_override = cx_getElement("override");
+	v_supplanguage = cx_getElement("supplocale");
     Genesys("command", "Database.set", {
     messaging: { customAttributes:
        { PD_BRAND: v_brand,
          PD_IP_LOCALIZATION: v_geolocation,
-         PD_HTML_LOCALE: v_language,
-         customerPhone: v_customerPhone }}},
+         PD_BW_LOCALE: v_language,
+		 PD_HTML_LOCALE: v_pagelanguage,
+		 PD_LOCALE_OVERRIDE: v_override,
+		 PD_SUPPORTED_LOCALE: v_supplanguage
+         }}},
     function(data){ /* fulfilled, returns data */}, function(){ /* rejected */ });
     console.log(log_prefix + ' Conversation Ready');
 });
