@@ -155,6 +155,13 @@ function cx_getElement(id) {
 	return evalue;
 }
 
+function cx_getElementByName(name) {
+	var evalue = document.getElementsByName(name).value;
+	console.log(log_prefix + ' ' + evalue);
+	return evalue[0].value;
+}
+
+
 //duration of the tone in milliseconds. Default is 500
 //frequency of the tone in hertz. default is 440
 //volume of the tone. Default is 1, off is 0.
