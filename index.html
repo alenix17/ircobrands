@@ -1,1 +1,86 @@
+<html lang="it" xml:lang="utf-8" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta http-equiv="Content-Type" content="plain/text; charset=utf-8"/>
+  <meta http-equiv="Content-Type" content="application/json"/>
+  <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-control" content="no-cache">
+  
+    <title>Ingersoll Rand Brand Test</title>
+    <!--<script type="text/javascript" src="jquery-3.3.1.min.js">-->
 
+
+<style>
+	.cx-common-container .cx-titlebar .cx-icon {
+    float: left;
+    width: 96px;
+    height: 96px;
+    margin-top: 200px
+   }
+   .gen-callback-customer-logo {
+    display: block;
+    width: 337px;
+    height: 96px;
+    background: url(ir-logo-v1.webp) no-repeat center;
+   }
+   label {
+    width: 80px;
+    display: inline-block;
+   }
+   legend {
+    color: red;
+    font-weight: bold
+   }
+   .button-91 {
+  color: #fff;
+  padding: 15px 25px;
+  background-color: #38D2D2;
+  background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 66% at 26% 20%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: inset -3px -3px 9px rgba(255, 255, 255, 0.25), inset 0px 3px 9px rgba(255, 255, 255, 0.3), inset 0px 1px 1px rgba(255, 255, 255, 0.6), inset 0px -8px 36px rgba(0, 0, 0, 0.3), inset 0px 1px 5px rgba(255, 255, 255, 0.6), 2px 19px 31px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+  font-weight: bold;
+  font-size: 16px;
+
+  border: 0;
+
+  cursor: pointer;
+}
+</style/>
+
+  </head>
+  <body>
+	  <h1><i class="gen-callback-customer-logo" style="font-size:48px;"></i>Ingersoll Rand Brand Messaging</h1>
+
+	<fieldset>
+	<br></br>
+	<legend>Brand Information</legend>
+      <label for="brand">Brand: </label>
+      <input id="brand" type="text" name="brand" value="" size="30" maxlength="30" />
+	<br></br>
+	  <label for="geolocation">geolocation: </label>
+      <input id="geolocation" type="text" name="geolocation" value="" size="30" maxlength="30" />
+	<br></br>
+      <label for="locale">Locale: </label>
+      <input id="locale" type="text" name="locale" value="" size="30" maxlength="30" />
+	<br></br>
+    </fieldset>
+	
+	<br></br>
+
+	<button class="button-91" id="messenger_btn" onclick="openMessenger()">
+	<!--<button id="messenger_btn" onclick="openMessenger()">-->
+	  Start Messaging 
+      </button>
+
+
+  </body>
+  <script type="text/javascript">
+    let openMessenger = function () {
+    let elem = document.createElement("script");
+    elem.setAttribute("type","text/javascript");
+    elem.src = "./widgets.irco.js"
+    document.head.appendChild(elem);
+  }
+
+  </script>
+</html>
