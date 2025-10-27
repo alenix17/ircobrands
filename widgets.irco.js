@@ -156,9 +156,11 @@ function cx_getElement(id) {
 }
 
 function cx_getElementByName(name) {
-	var evalue = document.getElementsByName(name).value;
+	var selector = "input[type='radio'][name="+name+"]:checked";
+	//var evalue = document.querySelector("input[type='radio'][name=rate]:checked").value;
+	var evalue = document.querySelector(selector).value;
 	console.log(log_prefix + ' ' + evalue);
-	return evalue[0].value;
+	return evalue;
 }
 
 
