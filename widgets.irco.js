@@ -1,9 +1,12 @@
 var log_prefix = "GCX widget-plugin: ";
 var bPlay = false;
-var v_firstName= "";
-var v_lastName= "";
-var v_customerEmail= "";
-var v_customerPhone= "";
+var v_domain="";
+var v_brand="";
+var v_geolocation="";
+var v_language="";
+var v_pagelanguage="";
+var v_override="";
+var v_supplanguage="";
 
   (function (g, e, n, es, ys) {
 
@@ -35,7 +38,8 @@ Genesys("subscribe", "Launcher.visible", function(){console.log(log_prefix + ' L
 Genesys("subscribe", "Launcher.hidden", function(){console.log(log_prefix + ' Launcher Hidden');});
 
 Genesys("subscribe", "Conversations.ready", function(){
-    v_brand= cx_getElement("brand");
+    v_domain = window.location.hostname;
+	v_brand= cx_getElement("brand");
     v_geolocation= cx_getElement("geolocation");
     v_language= cx_getElement("locale");
 	v_pagelanguage = cx_getElement("pagelocale");
@@ -43,7 +47,9 @@ Genesys("subscribe", "Conversations.ready", function(){
 	v_supplanguage = cx_getElement("supplocale");
     Genesys("command", "Database.set", {
     messaging: { customAttributes:
-       { PD_BRAND: v_brand,
+       { 
+		 PD_DOMAIN: v_domain,
+		 PD_BRAND: v_brand,
          PD_IP_LOCALIZATION: v_geolocation,
          PD_BW_LOCALE: v_language,
 		 PD_HTML_LOCALE: v_pagelanguage,
