@@ -24,7 +24,7 @@ var v_supplanguage="";
     g[e].c = es;
 	v_language = cx_getElement("locale");
 
-    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; ys.lang= v_pagelanguage; document.head.appendChild(ys);
+    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; ys.lang= v_language; document.head.appendChild(ys);
   })(window, 'Genesys', 'https://apps.mypurecloud.ie/genesys-bootstrap/genesys.min.js', {
     environment: 'prod-euc2',
     deploymentId: 'f93ec789-5ebc-4168-bf02-5fb1f4508bb3',
