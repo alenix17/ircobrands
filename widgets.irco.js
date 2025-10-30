@@ -52,9 +52,9 @@ Genesys("subscribe", "Conversations.ready", function(){
        { 
 		 PD_DOMAIN: v_domain,
 		 PD_BRAND: v_brand,
-         PD_IP_LOCALIZATION: v_geolocation,
+         PD_COUNTRY: v_geolocation,
          PD_BW_LOCALE: v_language,
-		 PD_HTML_LOCALE: v_pagelanguage,
+		 PD_LOCALE: v_pagelanguage,
 		 PD_LOCALE_OVERRIDE: v_override,
 		 PD_SUPPORTED_LOCALE: v_supplanguage
          }}},
