@@ -54,9 +54,7 @@ Genesys("subscribe", "Conversations.ready", function(){
 		 PD_BRAND: v_brand,
          PD_COUNTRY: v_geolocation,
          PD_BW_LOCALE: v_language,
-		 PD_LOCALE: v_pagelanguage,
-		 PD_LOCALE_OVERRIDE: v_override,
-		 PD_SUPPORTED_LOCALE: v_supplanguage
+		 PD_LOCALE: v_pagelanguage
          }}},
     function(data){ /* fulfilled, returns data */}, function(){ /* rejected */ });
     console.log(log_prefix + ' Conversation Ready');
