@@ -28,7 +28,7 @@ var v_supplanguage="";
   })(window, 'Genesys', 'https://apps.mypurecloud.ie/genesys-bootstrap/genesys.min.js', {
     environment: 'prod-euc2',
     deploymentId: 'f93ec789-5ebc-4168-bf02-5fb1f4508bb3',
-    debug: false
+    debug: true
   });
 
   Genesys("subscribe", "Launcher.ready" , function(o){
@@ -45,8 +45,6 @@ Genesys("subscribe", "Conversations.ready", function(){
     v_geolocation= cx_getElement("geolocation");
     v_language= cx_getElement("locale");
 	v_pagelanguage = cx_getElement("pagelocale");
-	v_override = cx_getElementByName("override");
-	v_supplanguage = cx_getElement("supplocale");
     Genesys("command", "Database.set", {
     messaging: { customAttributes:
        { 
