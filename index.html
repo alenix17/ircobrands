@@ -69,18 +69,19 @@
 	<fieldset>
 	<br></br>
 	<legend>Brand Data Input</legend>
-      <label for="brand">Brand: (in prod it is will be the URL domain</label>
+	  <p>URL domain name, that identifies the brand (Genesys Cloud attribute name PD_BRAND)</p>
+      <label for="brand">Brand: </label>
       <input id="brand" type="text" name="brand" value="" size="30" maxlength="30" />
 	<br></br>
-	  <label for="geolocation">geolocation: (this value is passed to Genesys Cloud as PD_COUNTRY) </label>
+	  <p>It is two char country code by geolocation resolution (Genesys Cloud attribute name PD_COUNTRY)</p>
+	  <label for="geolocation">geolocation: </label>
       <input id="geolocation" type="text" name="geolocation" size="30" maxlength="30" />
 	<br></br>
+	  <p>Browser Broweser Language (Genesys Cloud attribute name PD_BW_LOCALE)</p>
       <label for="locale">Browser Locale: </label>
       <input id="locale" type="text" name="locale" size="30" maxlength="30" />
 	<br></br>
-      <label for="supplocale">Browser Supported Locale: </label>
-      <input id="supplocale" type="text" name="supplocale" size="30" maxlength="30" />
-	<br></br>
+	  <p>(IETF Language Tage, Genesys Cloud attribute name PD_LOCALE, it is the selected language)</p>
       <label for="pagelocale">Page Locale: </label>
       <input id="pagelocale" type="text" name="pagelocale" size="30" maxlength="30" />
 	<br></br>
