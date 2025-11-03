@@ -42,14 +42,14 @@ Genesys("subscribe", "Launcher.hidden", function(){console.log(log_prefix + ' La
 Genesys("subscribe", "Conversations.ready", function(){
     v_domain = window.location.hostname;
 	v_brand= cx_getElement("brand");
+	// For testing purpose, it uses now the datatable, PD_DOMAIN not passed anymore. PD_BRAND has page domain URL
     v_geolocation= cx_getElement("geolocation");
     v_language= cx_getElement("locale");
 	v_pagelanguage = cx_getElement("pagelocale");
     Genesys("command", "Database.set", {
     messaging: { customAttributes:
        { 
-		 PD_DOMAIN: v_domain,
-		 PD_BRAND: v_brand,
+		 PD_BRAND: v_domain,
          PD_COUNTRY: v_geolocation,
          PD_BW_LOCALE: v_language,
 		 PD_LOCALE: v_pagelanguage
