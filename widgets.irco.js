@@ -27,7 +27,8 @@ var v_supplanguage="";
     ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; ys.lang= v_language; document.head.appendChild(ys);
   })(window, 'Genesys', 'https://apps.mypurecloud.ie/genesys-bootstrap/genesys.min.js', {
     environment: 'prod-euc2',
-    deploymentId: 'f93ec789-5ebc-4168-bf02-5fb1f4508bb3',
+	deploymentId: '1918c547-6938-4a11-bbe2-835a8acbd044',
+    //deploymentId: 'f93ec789-5ebc-4168-bf02-5fb1f4508bb3',
     debug: true
   });
 
