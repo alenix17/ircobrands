@@ -31,6 +31,9 @@ var v_supplanguage="";
     //deploymentId: 'f93ec789-5ebc-4168-bf02-5fb1f4508bb3',
     debug: true
   });
+ Genesys("registerPlugin", "Plugin", function(Plugin) {
+  console.log("config", Plugin.data("GenesysJS.configuration"));
+ });
 
   Genesys("subscribe", "Launcher.ready" , function(o){
     console.log(log_prefix + ' The queue works. Launcher Ready');
