@@ -53,6 +53,7 @@ Genesys("subscribe", "Conversations.ready", function(){
          PD_COUNTRY: v_geolocation,
          PD_BW_LOCALE: v_language,
 		 PD_LOCALE: v_pagelanguage
+		 // other special attributes are passed here using PD_X_ as naming convention prefix.
          }}},
     function(data){ /* fulfilled, returns data */}, function(){ /* rejected */ });
     console.log(log_prefix + ' Conversation Ready');
