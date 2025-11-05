@@ -140,6 +140,7 @@ Genesys("command", "Launcher.show",
 
    Genesys('subscribe', 'Messenger.ready', function () {
      console.log(log_prefix +  ' Messenger Ready');
+	   /*
   Genesys(
     'command',
     'Messenger.open',
@@ -150,7 +151,7 @@ Genesys("command", "Launcher.show",
     (error) => {
      console.log("Couldn't open messenger.", error);
     }
-  );
+  );*/
 });
 
 
