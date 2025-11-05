@@ -28,7 +28,7 @@ var v_supplanguage="";
   })(window, 'Genesys', 'https://apps.mypurecloud.ie/genesys-bootstrap/genesys.min.js', {
     environment: 'prod-euc2',
     deploymentId: 'be42a266-1786-4f96-8b66-396a71093fd4',
-    debug: true
+    debug: false
   });
 
   Genesys("subscribe", "Launcher.ready" , function(o){
@@ -154,6 +154,30 @@ Genesys("command", "Launcher.show",
   );*/
 });
 
+/* Toaster plugin */
+Genesys("subscribe", "Toaster.ready", () => {
+  Genesys(
+    "command",
+    "Toaster.open",
+    {
+      title: "Welcome to Genesys Cloud",
+      body: "Encountering issues? Our support team is ready to troubleshoot and assist you.",
+      buttons: {
+        type: "binary", // required when 'buttons' is present. Values: "unary" for one action button, "binary" for two action buttons
+        primary: "Get Support", // optional, default value is "Accept"
+        secondary: "Maybe Later", // optional, default value is "Decline"
+      },
+    },
+    function () {
+      /*fulfilled callback*/
+      console.log(log_prefix +  "Toaster is opened");
+    },
+    function (error) {
+      /*rejected callback*/
+      console.log(log_prefix +  "There was an error running the Toaster.open command:", error);
+    }
+  );
+});
 
 function cx_getElement(id) {
 	var evalue = document.getElementById(id).value;
