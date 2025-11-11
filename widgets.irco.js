@@ -87,7 +87,29 @@ Genesys("subscribe", "Messenger.opened", function(){
 Genesys("subscribe", "MessagingService.started", function({data}){
   console.log(log_prefix + ' MessagingService Started ' + data)
 });
-
+Genesys("subscribe", "Toaster.ready", () => {
+  Genesys(
+    "command",
+    "Toaster.open",
+    {
+      //title: "Welcome to Genesys Cloud",
+      body: "Ingersoll Rand uses the information you provide to us to contact you about our product and services.\nBy using this chat you agree to our terms and conditions https://www.irco.com/terms",
+      /*buttons: {
+        type: "binary", // required when 'buttons' is present. Values: "unary" for one action button, "binary" for two action buttons
+        primary: "Get Support", // optional, default value is "Accept"
+        secondary: "Maybe Later", // optional, default value is "Decline"
+      },*/
+    },
+    function () {
+      /*fulfilled callback*/
+      console.log("Toaster is opened");
+    },
+    function (error) {
+      /*rejected callback*/
+      console.log("There was an error running the Toaster.open command:", error);
+    }
+  );
+});
 
 var audioCtx = new (window.AudioContext || window.webkitAudioContext || window.audioContext);
 
