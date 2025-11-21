@@ -14,10 +14,12 @@
 		 var html = root.document.querySelector('html');
 		 var rootLang = root.navigator.languages || [root.navigator.language || root.navigator.userLanguage];
          var pageLang = html.getAttribute('lang');
+		 var localTime = new Date();
 		 window.addEventListener("load", (event) => {
   		    document.getElementById("locale").value = bwLang;
  		    document.getElementById("pagelocale").value = pageLang;
  		    document.getElementById("supplocale").value = rootLang;
+			document.getElementById("CurrLocalTime").innerHTML = localTime;
             //alert ("Default browser language is: " + bwLang + " supportedLang is: " + rootLang + " pageLang is: " + pageLang);
 
          });
@@ -69,6 +71,8 @@
 	<fieldset>
 	<br></br>
 	<legend>Brand Data Input</legend>
+	  <p>Local Date Time: </p><span id="CurrLocalTime"></span>
+	  
 	  <p>It is two char country code by geolocation resolution (Genesys Cloud attribute name PD_COUNTRY)</p>
 	  <label for="geolocation">geolocation: </label>
       <input id="geolocation" type="text" name="geolocation" value="US" size="30" maxlength="30" />
