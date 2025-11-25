@@ -1,4 +1,3 @@
-<script>
     var url = 'https://whatsapp.socialintents.com/api/chat/siwhatsapp.1.0.js';
     var s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;
     var chatSettings = {
@@ -21,4 +20,3 @@
         addWidget(chatSettings);
     };
     var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);
-</script>
