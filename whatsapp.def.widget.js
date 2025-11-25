@@ -3,10 +3,10 @@
     var chatSettings = {
         "backgroundColor": "#25d366",
         "textColor": "#000000",
-        "position": "right",
+        "position": "left",
         "marginBottom": "25",
-        "marginLeft": "0",
-        "marginRight": "25",
+        "marginLeft": "25",
+        "marginRight": "0",
         "logo": "./whatsapp-logo-128px.png",
         "ctaText": "Chat with us!",
         "chatIcon": "1",
