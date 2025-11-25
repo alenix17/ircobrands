@@ -11,7 +11,7 @@
         "ctaText": "Chat with us!",
         "chatIcon": "1",
         "chatIconImageUrl": "",
-        "showPopup": true,
+        "showPopup": false,
         "welcomeText": "Hi there! How can I help you?",
         "messageText": "Hello, I have a question about {{page_link}}",
         "phoneNumber": "+393346057893"
