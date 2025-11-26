@@ -20,4 +20,4 @@
     s.onload = function() {
         addWidget(chatSettings);
     };
-    var x = document.getElementsByTagName('whatsapp')[0];x.parentNode.insertAfter(s, x);
+    var x = document.getElementsByTagName('script')[0];x.parentNode.insertAfter(s, x);
