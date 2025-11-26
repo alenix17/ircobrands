@@ -1,5 +1,6 @@
     var url = 'https://whatsapp.socialintents.com/api/chat/siwhatsapp.1.0.js';
     var s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;
+    var number = document.getElementsById("whatsappnumber");
     var chatSettings = {
         "backgroundColor": "#25d366",
         "textColor": "#000000",
@@ -14,7 +15,7 @@
         "showPopup": false,
         "welcomeText": "Hi there! How can I help you?",
         "messageText": "Hello, I have a question about {{page_link}}",
-        "phoneNumber": "+393346057893"
+        "phoneNumber": number
     };
     s.onload = function() {
         addWidget(chatSettings);
