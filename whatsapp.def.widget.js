@@ -13,11 +13,11 @@
         "chatIcon": "1",
         "chatIconImageUrl": "",
         "showPopup": false,
-        "welcomeText": "Hi there! How can I help you?",
-        "messageText": "Hello, I have a question about {{page_link}}",
+        "welcomeText": "Contact Us",
+        "messageText": "Hello, I have a question about a product",
         "phoneNumber": number
     };
     s.onload = function() {
         addWidget(chatSettings);
     };
-    var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);
+    var x = document.getElementsByTagName('whatsapp')[0];x.parentNode.insertAfter(s, x);
