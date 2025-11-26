@@ -15,7 +15,7 @@
         "showPopup": false,
         "welcomeText": "Contact Us",
         "messageText": "Hello, I have a question about a product",
-        "phoneNumber": number
+        "phoneNumber": "+551151084220"
     };
     s.onload = function() {
         addWidget(chatSettings);
