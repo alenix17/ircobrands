@@ -1,6 +1,5 @@
     var url = 'https://whatsapp.socialintents.com/api/chat/siwhatsapp.1.0.js';
     var s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;
-    var number = document.getElementById("whatsappnumber").value;
     var chatSettings = {
         "backgroundColor": "#25d366",
         "textColor": "#000000",
