@@ -7,6 +7,7 @@ var v_language="";
 var v_pagelanguage="";
 var v_override="";
 var v_supplanguage="";
+var evalue="";
 
   (function (g, e, n, es, ys) {
 
@@ -40,7 +41,31 @@ Genesys("subscribe", "Launcher.visible", function(){console.log(log_prefix + ' L
 Genesys("subscribe", "Launcher.hidden", function(){console.log(log_prefix + ' Launcher Hidden');});
 
 Genesys("subscribe", "Conversations.ready", function(){
-    v_domain = window.location.hostname;
+	var evalue = document.getElementById("brandtype").value; 
+    
+    if (evalue === 'Ingersoll Rand') {
+      v_domain = "alenix17.irp.io";
+    } 
+    else if(evalue === 'Gardner Denver') {
+      v_domain = "alenix17.gdp.io";
+    }
+    else if(evalue === 'Elmo Rietschle') {
+      v_domain = "alenix17.er.io";
+    }
+    else if(evalue === 'CompAir') {
+      v_domain = "alenix17.ca.io";
+    }
+    else if(evalue === 'Robuschi') {
+      v_domain = "alenix17.ro.io";
+    }
+    else if(evalue === 'Arozone') {
+      v_domain = "alenix17.aro.io";
+    }
+    else {
+      v_domain = window.location.hostname;
+    }
+
+    //v_domain = window.location.hostname;
 	// v_brand= cx_getElement("brand");
 	// For testing purpose, it uses now the datatable, PD_DOMAIN not passed anymore. PD_BRAND has page domain URL
     v_geolocation= cx_getElement("geolocation");
