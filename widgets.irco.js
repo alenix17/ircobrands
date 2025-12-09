@@ -41,6 +41,7 @@ Genesys("subscribe", "Launcher.visible", function(){console.log(log_prefix + ' L
 Genesys("subscribe", "Launcher.hidden", function(){console.log(log_prefix + ' Launcher Hidden');});
 
 Genesys("subscribe", "Conversations.ready", function(){
+	
 	var evalue = document.getElementById("brandtype").value; 
     
     if (evalue === 'Ingersoll Rand') {
