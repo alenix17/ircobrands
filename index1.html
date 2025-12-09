@@ -87,6 +87,15 @@
 	<!--<button id="messenger_btn" onclick="openMessenger()">-->
 	  Start Messaging 
       </button>
+	<label for="brand">brand: </label>
+       <select id="brandtype" size="1" name="brandtype">
+              <option >Ingersoll Rand</option>
+	          <option >Gardner Denver</option>
+	          <option >Elmo Rietschle</option>
+	          <option >CompAir</option>
+	          <option >Robuschi</option>
+	          <option >Arozone</option>
+       </select>
     </fieldset>
 	<br></br>
 	<br></br>
@@ -98,7 +107,7 @@
 	document.getElementById("CurrLocalTime").innerHTML = localTime;
     let elem = document.createElement("script");
     elem.setAttribute("type","text/javascript");
-    elem.src = "./widgets.irco.js"
+    elem.src = "./widgets.irco1.js"
     document.head.appendChild(elem);
   }
 
