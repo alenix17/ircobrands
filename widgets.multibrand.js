@@ -62,6 +62,9 @@ Genesys("subscribe", "Conversations.ready", function(){
     else if(evalue === 'Arozone') {
       v_domain = "alenix17.aro.io";
     }
+    else if(evalue === 'Custom') {
+      v_domain = "alenix17.zzz.io";
+    }
     else {
       v_domain = window.location.hostname;
     }
