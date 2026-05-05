@@ -1,5 +1,4 @@
 const client = platformClient.ApiClient.instance;
-const client = platformClient.ApiClient.instance;
 client.setEnvironment(platformClient.PureCloudRegionHosts.eu_central_1);
 
 var clientId = "031c99a3-87b2-4974-9e6c-196c6801656f";
