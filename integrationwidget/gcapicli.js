@@ -4,8 +4,9 @@ client.setEnvironment(platformClient.PureCloudRegionHosts.eu_central_1);
 var clientId = "031c99a3-87b2-4974-9e6c-196c6801656f";
 var redirectUri = "";
 let codeVerifier = client.generatePKCECodeVerifier(128);
-let codeChallenge = await client.computePKCECodeChallenge(codeVerifier);
+let codeChallenge = client.computePKCECodeChallenge(codeVerifier);
 let stateunq = codeChallenge;
+console.log("challenge: " + codeChallenge);
 
 // Method1: Let loginPKCEGrant generate the code verifier
 client.loginPKCEGrant(clientId, redirectUri, { state: stateunq })
