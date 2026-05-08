@@ -1,3 +1,5 @@
+const platformClient = require('platformClient');
+
 const client = platformClient.ApiClient.instance;
 client.setEnvironment(platformClient.PureCloudRegionHosts.eu_central_1);
 
