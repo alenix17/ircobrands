@@ -22,6 +22,7 @@ client.loginPKCEGrant(clientId, redirectUri, { state: stateunq })
       throw new Error("HackState");
     }
     console.log(data);
+    getMessaggioDiSala();
   })
   .catch((err) => {
     // Handle failure response
