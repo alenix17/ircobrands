@@ -7,7 +7,7 @@ const apiInstance = new platformClient.ArchitectApi();
 client.setEnvironment(platformClient.PureCloudRegionHosts.eu_central_1);
 
 var clientId = "031c99a3-87b2-4974-9e6c-196c6801656f";
-var redirectUri = "";
+var redirectUri = "https://alenix17.github.io/ircobrands/integrationwidget/broadcast.html";
 let codeVerifier = client.generatePKCECodeVerifier(128);
 let codeChallenge = client.computePKCECodeChallenge(codeVerifier);
 let stateunq = codeChallenge;
