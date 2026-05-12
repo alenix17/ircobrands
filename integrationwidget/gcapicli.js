@@ -39,7 +39,7 @@ let opts = {
 apiInstance.getFlowsDatatableRow(datatableId, "default", opts)
   .then((data) => {
     console.log("getFlowsDatatableRow success! data:" + JSON.stringify(data));
-    document.getElementById("broadcastId").innerHTML = data.message;
+    document.getElementById("brodcastId").innerHTML = data.message;
 
   })
   .catch((err) => {
