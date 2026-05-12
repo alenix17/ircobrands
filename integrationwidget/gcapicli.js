@@ -1,6 +1,9 @@
 const platformClient = require('platformClient');
 
 const client = platformClient.ApiClient.instance;
+client.setPersistSettings(true);
+const apiInstance = new platformClient.ArchitectApi();
+
 client.setEnvironment(platformClient.PureCloudRegionHosts.eu_central_1);
 
 var clientId = "031c99a3-87b2-4974-9e6c-196c6801656f";
@@ -19,6 +22,8 @@ client.loginPKCEGrant(clientId, redirectUri, { state: stateunq })
       throw new Error("HackState");
     }
     console.log(data);
+    client.setAccessToken("your_access_token");
+
   })
   .catch((err) => {
     // Handle failure response
@@ -26,7 +31,6 @@ client.loginPKCEGrant(clientId, redirectUri, { state: stateunq })
   });
 
 function getMessaggioDiSala() {
-  let apiInstance = new platformClient.ArchitectApi();
 let datatableId = "05444a9f-4e75-4cb8-8d93-4fce32125c79"; // String | id of datatable
 let opts = { 
   "showbrief": false
