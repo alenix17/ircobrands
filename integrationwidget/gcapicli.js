@@ -24,3 +24,23 @@ client.loginPKCEGrant(clientId, redirectUri, { state: stateunq })
     // Handle failure response
     console.log(err);
   });
+
+function getMessaggioDiSala() {
+  let apiInstance = new platformClient.ArchitectApi();
+let datatableId = "05444a9f-4e75-4cb8-8d93-4fce32125c79"; // String | id of datatable
+let opts = { 
+  "showbrief": false
+};
+
+// Returns the rows for the datatable with the given id
+apiInstance.getFlowsDatatableRow(datatableId, "default", opts)
+  .then((data) => {
+    console.log("getFlowsDatatableRow success! data:" + JSON.stringify(data));
+    document.getElementById("captionX").value = data.message;
+
+  })
+  .catch((err) => {
+    console.log("There was a failure calling getFlowsDatatableRow");
+    console.error(err);
+  });
+}
