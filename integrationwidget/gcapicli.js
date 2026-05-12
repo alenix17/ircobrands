@@ -44,6 +44,6 @@ apiInstance.getFlowsDatatableRow(datatableId, "default", opts)
   })
   .catch((err) => {
     console.log("There was a failure calling getFlowsDatatableRow");
-    console.error(err);
+    console.log(err);
   });
 }
