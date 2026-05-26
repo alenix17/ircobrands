@@ -98,9 +98,14 @@ document.addEventListener('DOMContentLoaded',function(){
         }else {
             interactionId = lastInteractionPayload.data.interaction.id;
         }
+        let partContext = {
+            transferTarget: 'f9346a4f-579b-4677-a4e8-a8a6d8ebc534',
+            transferTargetType: 'queueId'
+        };
         let payload = {
             action: event.target.outerText,
-            id: interactionId
+            id: interactionId,
+            participantContext: partContext
         };
         document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
             type: 'updateInteractionState',
