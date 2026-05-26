@@ -23,7 +23,7 @@ window.Framework = {
         enableCallHistory: false,
         defaultOutboundSMSCountryCode: "+1",
         searchTargets: ["people", "queues", "frameworkContacts", "externalContacts"],
-        callControls: ["pickup", "transfer", "mute", "disconnect"],
+        callControls: ["pickup", "mute", "disconnect"],
 /*
         callControls: ["pickup", "transfer", "mute", "disconnect"],
 */
