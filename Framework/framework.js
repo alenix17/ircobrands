@@ -24,6 +24,9 @@ window.Framework = {
         defaultOutboundSMSCountryCode: "+1",
         searchTargets: ["people", "queues", "frameworkContacts", "externalContacts"],
         callControls: ["pickup", "transfer", "mute", "disconnect"],
+/*
+        callControls: ["pickup", "transfer", "mute", "disconnect"],
+*/
             theme: {
                 primary: '#d4cebd',
                 text: '#123'
