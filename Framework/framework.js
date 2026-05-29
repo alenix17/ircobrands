@@ -22,11 +22,12 @@ window.Framework = {
         enableServerSideLogging: false,
         enableCallHistory: false,
         defaultOutboundSMSCountryCode: "+1",
-        searchTargets: ["people", "queues", "frameworkContacts", "externalContacts"],
-        callControls: ["pickup", "mute", "disconnect"],
-/*
+        /*searchTargets: ["people", "queues", "frameworkContacts", "externalContacts"],*/
+        searchTargets: ["people"],
+        /*callControls: ["pickup", "mute", "disconnect"],*/
+
         callControls: ["pickup", "transfer", "mute", "disconnect"],
-*/
+
             theme: {
                 primary: '#d4cebd',
                 text: '#123'
