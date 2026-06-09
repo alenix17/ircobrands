@@ -46,4 +46,5 @@ apiInstance.getFlowsDatatableRow(datatableId, "default", opts)
     console.log("There was a failure calling getFlowsDatatableRow");
     console.log(err);
   });
+  document.dispatchEvent('dataTableRefresh');
 }
