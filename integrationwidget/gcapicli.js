@@ -1,5 +1,12 @@
 const platformClient = require('platformClient');
 
+const dtRefresh = new Event("dataTableRefreshEvent");
+document.addEventListener("dataTableRefreshEvent", (e) => {
+   setTimeout(
+});
+
+
+
 const client = platformClient.ApiClient.instance;
 client.setPersistSettings(true);
 const apiInstance = new platformClient.ArchitectApi();
