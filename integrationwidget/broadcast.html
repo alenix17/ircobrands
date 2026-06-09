@@ -24,6 +24,12 @@
             elem.src = "./gcapicli.js"
             document.head.appendChild(elem);
         });
+		window.addEventListener('dataTableRefresh', function(event) {
+            setTimeout(() => {
+              console.log("datatable lookup");
+	          getMessaggioDiSala();
+            }, 30000);   
+        });
      </script>
 
 
@@ -67,18 +73,11 @@
   </head>
   <body>
 	  <h1><i class="gen-callback-customer-logo" style="font-size:36px;"></i>Messaggio di Sala WidgetApp</h1>
-
 	<fieldset>
 	<br></br>
 	<legend>Broadcast Message</legend>
      <p id="brodcastId"></p>
-     <script type="text/javascript">
-      setTimeout(() => {
-         console.log("datatable lookup");
-	     getMessaggioDiSala();
-       }, 30000);   
-     </script>
-	<br></br>
+  	<br></br>
     </fieldset>
 	<!--
 	<button class="button-91" id="messenger_btn" onclick="openMessenger()">
