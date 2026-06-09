@@ -24,7 +24,7 @@
             elem.src = "./gcapicli.js"
             document.head.appendChild(elem);
         });
-		window.addEventListener('dataTableRefresh', function(event) {
+		document.addEventListener('dataTableRefresh', function(event) {
             setTimeout(() => {
               console.log("datatable lookup");
 	          getMessaggioDiSala();
