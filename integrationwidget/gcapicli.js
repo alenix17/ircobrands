@@ -1,10 +1,6 @@
 const platformClient = require('platformClient');
 
 const dtRefresh = new Event("dataTableRefreshEvent");
-document.addEventListener("dataTableRefreshEvent", (e) => {
-   setTimeout(
-});
-
 
 
 const client = platformClient.ApiClient.instance;
@@ -53,5 +49,12 @@ apiInstance.getFlowsDatatableRow(datatableId, "default", opts)
     console.log("There was a failure calling getFlowsDatatableRow");
     console.log(err);
   });
-  document.dispatchEvent('dataTableRefresh');
+  document.dispatchEvent(dtRefresh);
 }
+
+document.addEventListener('dataTableRefreshEvent', function(event) {
+      setTimeout(() => {
+         console.log("datatable lookup");
+	      getMessaggioDiSala();
+      }, 30000);   
+});
