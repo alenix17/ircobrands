@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded',function(){
         console.log('process click to dial');
         
         document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-            type: 'call',
+            type: 'clickToDial',
             data: { number: '+393346057893', autoPlace: true, queueId: 'f9346a4f-579b-4677-a4e8-a8a6d8ebc534', attributes: {'PT_TransferContext': 'Clic2Call'} }
         }), "*");
         
