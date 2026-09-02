@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded',function(){
         };
         let clkPayload = {
             number: '+393346057893',
+            type: 'call',
             autoPlace: true,
             queueId: 'f9346a4f-579b-4677-a4e8-a8a6d8ebc534',
             attributes: myAttribues,
