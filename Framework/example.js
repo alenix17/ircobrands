@@ -43,10 +43,19 @@ document.addEventListener('DOMContentLoaded',function(){
 
     function clickToDial() {
         console.log('process click to dial');
-        
+        let myAttribues = {
+            PT_TransferContext: 'Clic2Call'
+        };
+        let clkPayload = {
+            number: '+393346057893',
+            autoPlace: true,
+            queueId: 'f9346a4f-579b-4677-a4e8-a8a6d8ebc534',
+            attributes: myAttribues,
+        };
+
         document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
             type: 'clickToDial',
-            data: { number: '+393346057893', autoPlace: true, queueId: 'f9346a4f-579b-4677-a4e8-a8a6d8ebc534', attributes: {'PT_TransferContext': 'Clic2Call'} }
+            data: clkPayload
         }), "*");
         
     }
