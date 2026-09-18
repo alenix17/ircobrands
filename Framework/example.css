@@ -5,7 +5,32 @@
     top: 10px;
     right: 10px;
 }
-
+.scriptcontainer {
+    color-scheme: light;
+    font-family: var(--font-roboto),Arial,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.429rem;
+    color: var(--color-text-mid,#152550);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: inherit;
+    max-height: 712px;
+    top: unset;
+    z-index: 99999999;
+    border-width: medium;
+    border-style: none;
+    border-color: currentcolor;
+    border-image: none;
+    position: fixed;
+    margin: 0px !important;
+    min-height: initial !important;
+    left: unset;
+    right: 20px;
+    bottom: 94px;
+    width: 426px;
+    height: calc(70%);
+}
 body > div > iframe {
     width: inherit;
     height: inherit;
