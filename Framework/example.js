@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 document.getElementById("openCallLogPayLoad").value = event.data;
             } else if(message.type == "interactionSubscription"){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
-                console.log("FWK: " + event.data;
+                console.log("FWK: " + event.data);
             } else if(message.type == "userActionSubscription"){
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
