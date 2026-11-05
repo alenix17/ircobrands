@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
                 document.getElementById("notificationSubscriptionPayload").value = event.data;
+                console.log("NFK: " + event.data);
             } else if(message.type == "contactSearch") {
                 document.getElementById("searchText").innerHTML = ": " + message.data.searchString;
                 sendContactSearch();
