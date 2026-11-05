@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded',function(){
             } else if(message.type == "openCallLog"){
                 document.getElementById("openCallLogPayLoad").value = event.data;
             } else if(message.type == "interactionSubscription"){
-                document.getElementById("interactionSubscriptionPayload").value = event.data;
+                document.getElementById("interactionSubscriptionPayload").value = event.data
+                console.log("FWK: " + event.data;
             } else if(message.type == "userActionSubscription"){
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
