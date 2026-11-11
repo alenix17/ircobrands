@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded',function(){
                 document.getElementById("searchText").innerHTML = ": " + message.data.searchString;
                 sendContactSearch();
             }
+            else if(message.type == "genesysAuthToken") {
+               document.getElementById("accessToken").innerHTML = message.type.token;
+            }
         }
     });
 
