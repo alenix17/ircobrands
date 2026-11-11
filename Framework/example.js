@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('view-newInteraction').addEventListener("click", setView);
     document.getElementById('view-callback').addEventListener("click", setView);
     document.getElementById('view-settings').addEventListener("click", setView);
+    document.getElementById("authToken").addEventListener("click", myAuthToken);
+
 
     window.addEventListener("message", function(event) {
         var message = JSON.parse(event.data);
@@ -43,6 +45,13 @@ document.addEventListener('DOMContentLoaded',function(){
             }
         }
     });
+
+    function myAuthToken() {
+        window.PureCloud.User.getAuthToken((token) => {
+            console.log("ALG *** Genesys Cloud Auth Token: " + token);
+            document.getElementById("accessToken").innerHTML = "token=" + token;
+        });
+   }
 
     function clickToDial() {
         console.log('process click to dial');
