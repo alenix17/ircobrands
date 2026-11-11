@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('view-newInteraction').addEventListener("click", setView);
     document.getElementById('view-callback').addEventListener("click", setView);
     document.getElementById('view-settings').addEventListener("click", setView);
-    document.getElementById("authToken").addEventListener("click", myAuthToken);
 
 
     window.addEventListener("message", function(event) {
