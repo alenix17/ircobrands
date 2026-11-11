@@ -43,17 +43,12 @@ document.addEventListener('DOMContentLoaded',function(){
                 sendContactSearch();
             }
             else if(message.type == "genesysAuthToken") {
-               document.getElementById("accessToken").innerHTML = message.type.token;
+               console.log("ALG *** Genesys Cloud Auth Token: " + message);
+
+               document.getElementById("accessToken").innerHTML = message;
             }
         }
     });
-
-    function myAuthToken() {
-        window.PureCloud.User.getAuthToken((token) => {
-            console.log("ALG *** Genesys Cloud Auth Token: " + token);
-            document.getElementById("accessToken").innerHTML = "token=" + token;
-        });
-   }
 
     function clickToDial() {
         console.log('process click to dial');
