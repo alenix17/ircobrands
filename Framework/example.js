@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded',function(){
             else if(message.type == "genesysAuthToken") {
                console.log("ALG *** Genesys Cloud Auth Token: " + message);
 
-               document.getElementById("accessToken").innerHTML = message;
+               document.getElementById("accessToken").innerHTML = message.token;
             }
         }
     });
