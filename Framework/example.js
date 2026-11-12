@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     hasReloadedWithClientId = true;
                     const iframe = document.getElementById("softphone");
                     iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
-                    console.log("FWK GUI: IFRAME RELOADED");
+                    console.log("FWK GUI LOGIN: IFRAME RELOADED");
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
                       type: 'getToken',
                       data: ' '
@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded',function(){
                 else if(message.data.category == "logout") {
                     hasReloadedWithClientId = false;
                     const iframe = document.getElementById("softphone");
-                    iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+                    console.log("FWK GUI LOGOUT: IFRAME RELOADED");
+                    //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
