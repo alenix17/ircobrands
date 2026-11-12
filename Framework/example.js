@@ -41,12 +41,22 @@ document.addEventListener('DOMContentLoaded',function(){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
             } else if(message.type == "userActionSubscription"){
-                if(!hasReloadedWithClientId) {
+                if(!hasReloadedWithClientId && message.data.category == "login") {
                     hasReloadedWithClientId = true;
                     const iframe = document.getElementById("softphone");
                     iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     iframe.contentWindow.location.reload();
                     console.log("FWK GUI: IFRAME RELOADED");
+                    iframe.contentWindow.postMessage(JSON.stringify({
+                        type: 'getToken',
+                        data: '')
+                        }), "*");
+                }
+                else if(message.data.category == "logout") {
+                    const iframe = document.getElementById("softphone");
+                    iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+                    hasReloadedWithClientId = false;
+                    iframe.contentWindow.location.reload();
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
@@ -58,7 +68,6 @@ document.addEventListener('DOMContentLoaded',function(){
             }
             else if(message.type == "genesysAuthToken") {
                console.log("ALG *** Genesys Cloud Auth Token: " + message);
-
                document.getElementById("accessToken").innerHTML = message.token;
             }
         }
