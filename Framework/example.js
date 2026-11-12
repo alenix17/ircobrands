@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     hasReloadedWithClientId = false;
                     const iframe = document.getElementById("softphone");
                     console.log("FWK GUI LOGOUT: IFRAME RELOADED");
-                    //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+                    waitUntilTokenRevoked(document.getElementById("accessToken").value);
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
@@ -200,3 +200,31 @@ document.addEventListener('DOMContentLoaded',function(){
         }), "*");
     }
 })
+
+async function waitUntilTokenRevoked(token) {
+    const checkUrl = "https://api.mypurecloud.de";
+    const iframe = document.getElementById("softphone");
+
+    for (let attempt = 0; attempt < 15; attempt++) {
+        try {
+            const response = await fetch(checkUrl, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+
+            if (response.status === 401) {
+                console.log("ALG Logout confirmed: Token is officially revoked.");
+                iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+                return true; // Logout is 100% finished
+            }
+        } catch (err) {
+            // Network error or CORS block
+        }
+
+        // Wait 300ms before checking again
+        await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    return false;
+}
