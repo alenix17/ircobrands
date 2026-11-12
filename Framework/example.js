@@ -1,3 +1,5 @@
+let hasReloadedWithClientId = false;
+
 document.addEventListener('DOMContentLoaded',function(){
     
     document.getElementById("clickToDial").addEventListener("click", clickToDial);
@@ -21,7 +23,15 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
     window.addEventListener("message", function(event) {
-        var message = JSON.parse(event.data);
+        if (event.origin !== "https://mypurecloud.de") {
+           return;
+        }
+        let message;
+        try {
+           message = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
+        } catch (e) {
+           return;
+        }
         if(message){
             if(message.type == "screenPop"){
                 document.getElementById("screenPopPayload").value = event.data;
@@ -34,6 +44,11 @@ document.addEventListener('DOMContentLoaded',function(){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
             } else if(message.type == "userActionSubscription"){
+                if(!hasReloadedWithClientId) {
+                    hasReloadedWithClientId = true;
+                    const iframe = document.getElementById("softphone");
+                    iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt="
+                }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
                 document.getElementById("notificationSubscriptionPayload").value = event.data;
