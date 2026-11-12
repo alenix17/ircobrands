@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded',function(){
                     const iframe = document.getElementById("softphone");
                     console.log("FWK GUI LOGOUT: IFRAME RELOADED");
                     waitUntilTokenRevoked(currentAuthToken).then(function () {
-                    currentAuthToken = null;
+                       currentAuthToken = null;
+                       document.getElementById("accessToken").innerHTML = currentAuthToken;
                     });
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
