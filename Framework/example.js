@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded',function(){
                     iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     iframe.contentWindow.location.reload();
                     console.log("FWK GUI: IFRAME RELOADED");
-                    iframe.contentWindow.postMessage(JSON.stringify({
-                        type: 'getToken',
-                        data: ''
-                        }), "*");
+                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                      type: 'getToken',
+                      data: ' '
+                    }), "*");
                 }
                 else if(message.data.category == "logout") {
                     const iframe = document.getElementById("softphone");
