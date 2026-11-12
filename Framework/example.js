@@ -52,10 +52,9 @@ document.addEventListener('DOMContentLoaded',function(){
                     }), "*");
                 }
                 else if(message.data.category == "logout") {
+                    hasReloadedWithClientId = false;
                     const iframe = document.getElementById("softphone");
                     iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
-                    hasReloadedWithClientId = false;
-                    iframe.contentWindow.location.reload();
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
