@@ -1,4 +1,5 @@
 let hasReloadedWithClientId = false;
+let currentAuthToken = null;
 
 document.addEventListener('DOMContentLoaded',function(){
     
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     hasReloadedWithClientId = false;
                     const iframe = document.getElementById("softphone");
                     console.log("FWK GUI LOGOUT: IFRAME RELOADED");
-                    waitUntilTokenRevoked(document.getElementById("accessToken").value);
+                    await waitUntilTokenRevoked(currentAuthToken);
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded',function(){
             else if(message.type == "genesysAuthToken") {
                console.log("ALG *** Genesys Cloud Auth Token: " + message);
                document.getElementById("accessToken").innerHTML = message.token;
+               currentAuthToken = message.token;
             }
         }
     });
@@ -217,6 +219,8 @@ async function waitUntilTokenRevoked(token) {
 
             if (response.status === 401) {
                 console.log("ALG Logout confirmed: Token is officially revoked.");
+                await new Promise(resolve => setTimeout(resolve, 300));
+                break;
                 //return true; // Logout is 100% finished
             }
         } catch (err) {
