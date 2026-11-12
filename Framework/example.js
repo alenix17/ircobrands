@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
     window.addEventListener("message", function(event) {
-        if (event.origin !== "https://mypurecloud.de") {
-           return;
-        }
         let message;
         try {
            message = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
