@@ -221,14 +221,12 @@ async function waitUntilTokenRevoked(token) {
 
             if (response.status === 401) {
                 console.log("ALG Logout confirmed: Token is officially revoked.");
-                //await new Promise(resolve => setTimeout(resolve, 300));
                 break;
                 //return true; // Logout is 100% finished
             }
         } catch (err) {
             // Network error or CORS block
         }
-
         // Wait 300ms before checking again
         await new Promise(resolve => setTimeout(resolve, 300));
     }
