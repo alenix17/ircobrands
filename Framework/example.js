@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     console.log("FWK GUI: IFRAME RELOADED");
                     iframe.contentWindow.postMessage(JSON.stringify({
                         type: 'getToken',
-                        data: ''})
+                        data: ''
                         }), "*");
                 }
                 else if(message.data.category == "logout") {
