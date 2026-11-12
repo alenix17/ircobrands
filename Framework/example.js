@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded',function(){
 })
 
 async function waitUntilTokenRevoked(token) {
-    const checkUrl = "https://api.mypurecloud.de";
+    const checkUrl = "https://api.mypurecloud.de/api/v2/tokens/me";
     const iframe = document.getElementById("softphone");
 
     for (let attempt = 0; attempt < 15; attempt++) {
@@ -210,7 +210,8 @@ async function waitUntilTokenRevoked(token) {
             const response = await fetch(checkUrl, {
                 method: "GET",
                 headers: {
-                    "Authorization": "Bearer " + token
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
                 }
             });
 
