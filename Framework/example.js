@@ -1,7 +1,7 @@
 let hasReloadedWithClientId = false;
 let currentAuthToken = null;
 
-document.addEventListener('DOMContentLoaded',function(){
+document.addEventListener('DOMContentLoaded', function(){
     
     document.getElementById("clickToDial").addEventListener("click", clickToDial);
     document.getElementById("addAssociation").addEventListener("click", addAssociation);
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('view-settings').addEventListener("click", setView);
 
 
-    window.addEventListener("message", function(event) {
+    window.addEventListener("message", async function(event) {
         let message;
         try {
            message = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
