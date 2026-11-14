@@ -55,11 +55,15 @@ document.addEventListener('DOMContentLoaded', function(){
                 else if(message.data.category == "logout") {
                     hasReloadedWithClientId = false;
                     const iframe = document.getElementById("softphone");
-                    console.log("FWK GUI LOGOUT: IFRAME RELOADED");
-                    waitUntilTokenRevoked(currentAuthToken).then(function () {
-                       currentAuthToken = null;
-                       document.getElementById("accessToken").innerHTML = currentAuthToken;
-                    });
+                    console.log("FWK GUI LOGOUT...");
+                    await waitUntilTokenRevoked(currentAuthToken);
+                    currentAuthToken = null;
+                    document.getElementById("accessToken").innerHTML = currentAuthToken;
+                    //waitUntilTokenRevoked(currentAuthToken).then(function () {
+                    //   currentAuthToken = null;
+                    //   document.getElementById("accessToken").innerHTML = currentAuthToken;
+                    //});
+                    console.log("ALG *** : IFRAME RELOADED");
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
             } else if(message.type == "notificationSubscription"){
