@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function(){
             } else if(message.type == "userActionSubscription"){
                 if(!hasReloadedWithClientId && message.data.category == "login") {
                     hasReloadedWithClientId = true;
-                    //const iframe = document.getElementById("softphone");
-                    //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+                    const iframe = document.getElementById("softphone");
+                    iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     console.log("FWK GUI LOGIN: IFRAME RELOADED");
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
                       type: 'getToken',
@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 else if(message.data.category == "logout") {
                     hasReloadedWithClientId = false;
-                    //const iframe = document.getElementById("softphone");
-                    //console.log("FWK GUI LOGOUT...");
-                    //await waitUntilTokenRevoked(currentAuthToken);
+                    const iframe = document.getElementById("softphone");
+                    console.log("FWK GUI LOGOUT...");
+                    await waitUntilTokenRevoked(currentAuthToken);
                     currentAuthToken = null;
                     document.getElementById("accessToken").innerHTML = currentAuthToken;
                     //waitUntilTokenRevoked(currentAuthToken).then(function () {
