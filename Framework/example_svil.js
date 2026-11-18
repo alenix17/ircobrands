@@ -1,1 +1,241 @@
+let hasReloadedWithClientId = false;
+let currentAuthToken = null;
 
+document.addEventListener('DOMContentLoaded', function(){
+    
+    document.getElementById("clickToDial").addEventListener("click", clickToDial);
+    document.getElementById("addAssociation").addEventListener("click", addAssociation);
+    document.getElementById("addAttribute").addEventListener("click", addAttribute);
+    document.getElementById('addTransferContext').addEventListener("click", addTransferContext);
+    document.getElementById('updateUserStatus').addEventListener("click", updateUserStatus);
+    document.getElementById('pickupInteraction').addEventListener("click", updateInteractionState);
+    document.getElementById('securePauseInteraction').addEventListener("click", updateInteractionState);
+    document.getElementById('disconnectInteraction').addEventListener("click", updateInteractionState);
+    document.getElementById('holdInteraction').addEventListener("click", updateInteractionState);
+    document.getElementById('muteInteraction').addEventListener("click", updateInteractionState);
+    document.getElementById('updateAudioConfiguration').addEventListener("click", updateAudioConfiguration);
+    document.getElementById('sendCustomNotification').addEventListener("click", sendCustomNotification);
+    
+    document.getElementById('view-interactionList').addEventListener("click", setView);
+    document.getElementById('view-calllog').addEventListener("click", setView);
+    document.getElementById('view-newInteraction').addEventListener("click", setView);
+    document.getElementById('view-callback').addEventListener("click", setView);
+    document.getElementById('view-settings').addEventListener("click", setView);
+
+
+    window.addEventListener("message", async function(event) {
+        let message;
+        try {
+           message = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
+        } catch (e) {
+           return;
+        }
+        if(message){
+            if(message.type == "screenPop"){
+                document.getElementById("screenPopPayload").value = event.data;
+            } else if(message.type == "processCallLog"){
+                document.getElementById("processCallLogPayLoad").value = event.data;
+                console.log("PLK: " + event.data);
+            } else if(message.type == "openCallLog"){
+                document.getElementById("openCallLogPayLoad").value = event.data;
+            } else if(message.type == "interactionSubscription"){
+                document.getElementById("interactionSubscriptionPayload").value = event.data
+                console.log("FWK: " + event.data);
+            } else if(message.type == "userActionSubscription"){
+                if(!hasReloadedWithClientId && message.data.category == "login") {
+                    hasReloadedWithClientId = true;
+                    const iframe = document.getElementById("softphone");
+                    //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+                    console.log("FWK GUI LOGIN: IFRAME RELOADED");
+                    //document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                    //  type: 'getToken',
+                    //  data: ' '
+                    //}), "*");
+                }
+                else if(message.data.category == "logout") {
+                    hasReloadedWithClientId = false;
+                    const iframe = document.getElementById("softphone");
+                    console.log("FWK GUI LOGOUT...");
+                    //await waitUntilTokenRevoked(currentAuthToken);
+                    //currentAuthToken = null;
+                    //document.getElementById("accessToken").innerHTML = currentAuthToken;
+                    //waitUntilTokenRevoked(currentAuthToken).then(function () {
+                    //   currentAuthToken = null;
+                    //   document.getElementById("accessToken").innerHTML = currentAuthToken;
+                    //});
+                    console.log("ALG *** : IFRAME RELOADED");
+                }
+                document.getElementById("userActionSubscriptionPayload").value = event.data;
+            } else if(message.type == "notificationSubscription"){
+                document.getElementById("notificationSubscriptionPayload").value = event.data;
+                console.log("NFK: " + event.data);
+            } else if(message.type == "contactSearch") {
+                document.getElementById("searchText").innerHTML = ": " + message.data.searchString;
+                sendContactSearch();
+            }
+            else if(message.type == "genesysAuthToken") {
+               console.log("ALG *** Genesys Cloud Auth Token: " + message);
+               document.getElementById("accessToken").innerHTML = message.token;
+               currentAuthToken = message.token;
+            }
+        }
+    });
+
+    function clickToDial() {
+        console.log('process click to dial');
+        let myAttribues = {
+            PT_TransferContext: 'Clic2Call'
+        };
+        let clkPayload = {
+            number: '+393346057893',
+            type: 'call',
+            autoPlace: true,
+            queueId: '1b4b70d2-20df-4cf2-9de0-e83437775061',
+            attributes: myAttribues,
+        };
+
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'clickToDial',
+            data: clkPayload
+        }), "*");
+        
+    }
+
+    function addAssociation() {
+        console.log('process add association');
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'addAssociation',
+            data: JSON.parse(document.getElementById("associationPayload").value)
+        }), "*");
+    }
+
+    function addAttribute() {
+        console.log('process add attribute');
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'addAttribute',
+            data: JSON.parse(document.getElementById("attributePayload").value)
+        }), "*");
+    }
+
+    function addTransferContext() {
+        console.log('process add Transfer Context');
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'addTransferContext',
+            data: JSON.parse(document.getElementById("transferContextPayload").value)
+        }), "*");
+    }
+
+    function sendContactSearch() {
+        console.log('process add Search Context');
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'sendContactSearch',
+            data: JSON.parse(document.getElementById("contactSearchPayload").value)
+        }), "*");
+    }
+
+    function updateUserStatus() {
+        console.log('process user status update');
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'updateUserStatus',
+            data: { id:document.getElementById("statusDropDown").value }
+        }), "*");
+    }
+
+    function updateInteractionState(event) {
+        console.log('process interaction state change');
+        var lastInteractionPayload = JSON.parse(document.getElementById("interactionSubscriptionPayload").value);
+        var interactionId;
+        if (lastInteractionPayload.data.interaction.old){
+            interactionId = lastInteractionPayload.data.interaction.old.id;
+        }else {
+            interactionId = lastInteractionPayload.data.interaction.id;
+        }
+        let partContext = {
+            transferTarget: 'f9346a4f-579b-4677-a4e8-a8a6d8ebc534',
+            transferTargetType: 'queueId'
+        };
+        let payload = {
+            action: event.target.outerText,
+            id: interactionId,
+            participantContext: partContext
+        };
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'updateInteractionState',
+            data: payload
+        }), "*");
+    }
+
+    function updateAudioConfiguration(){
+        console.log('Update Audio Configuration');
+        var payload = {
+            call: document.getElementById('audio-call').checked,
+            chat: document.getElementById('audio-chat').checked,
+            email: document.getElementById('audio-email').checked,
+            callback: document.getElementById('audio-callback').checked,
+            message: document.getElementById('audio-message').checked,
+            voicemail: document.getElementById('audio-voicemail').checked
+        }
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'updateAudioConfiguration',
+            data: payload
+        }), "*");
+    }
+
+
+    function setView(event) {
+        console.log('process view update');
+        let payload = {
+            type:"main", 
+            view: {
+                name:event.target.outerText
+            }
+        };
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'setView',
+            data: payload
+        }), "*");
+    }
+
+    function sendCustomNotification(){
+        console.log('Send Custom User Notification');
+        var payload = {
+            message: document.getElementById('customNotificationMessage').value,
+            type: document.getElementById('notificationType').value,  
+            timeout: document.getElementById('notificationTimeout').value
+        };
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'sendCustomNotification',
+            data: payload
+        }), "*");
+    }
+})
+
+async function waitUntilTokenRevoked(token) {
+    const checkUrl = "https://api.mypurecloud.de/api/v2/tokens/me";
+    const iframe = document.getElementById("softphone");
+
+    for (let attempt = 0; attempt < 15; attempt++) {
+        try {
+            const response = await fetch(checkUrl, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (response.status === 401) {
+                console.log("ALG Logout confirmed: Token is officially revoked.");
+                await new Promise(resolve => setTimeout(resolve, 300));
+                break;
+            }
+        } catch (err) {
+            // Network error or CORS block
+        }
+        // Wait 300ms before checking again
+        await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+
+    return false;
+}
