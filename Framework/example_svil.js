@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
         let message;
         try {
            message = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
+           console.log("ALG FWK * : " + JSON.stringify(message));
         } catch (e) {
            return;
         }
