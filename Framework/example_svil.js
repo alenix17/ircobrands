@@ -288,6 +288,11 @@ async function handleLoginReload(ifsrc) {
             permissionStatusNot.onchange = null;
         }
         };
+        console.warn('ALG * Permissions API microphone:', permissionStatusMic.state);
+        console.warn('ALG * Permissions API camera:', permissionStatusCam.state);
+        console.warn('ALG * Permissions API geolocation:', permissionStatusGeo.state);
+        console.warn('ALG * Permissions API notifications:', permissionStatusNot.state);
+
         if(permissionStatusMic.state !== 'prompt' && permissionStatusCam.state !== 'prompt' &&
              permissionStatusGeo.state !== 'prompt' && permissionStatusNot.state !== 'prompt') {
            isReloadQueued = false;
