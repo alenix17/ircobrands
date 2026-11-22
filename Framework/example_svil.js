@@ -248,6 +248,7 @@ async function waitUntilTokenRevoked(token) {
 
 function executeIframeReload(ifsrc) {
     // Reassigning src works safely for both same-origin and cross-origin iframes
+    const iframe = document.getElementById("softphone");
     iframe.src = ifsrc;
 }
 
