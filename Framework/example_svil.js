@@ -269,6 +269,7 @@ async function handleLoginReload(ifsrc) {
         permissionStatusMic.onchange = () => {
         // Trigger the reload as soon as the user clicks "Allow" or "Block"
         if (permissionStatusMic.state !== 'prompt') {
+            console.warn('ALG * Permissions API microphone:', permissionStatusMic.state);
             isReloadQueued = false;
             permissionStatusMic.onchange = null;
             executeIframeReload(ifsrc);
