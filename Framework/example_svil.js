@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     console.log("FWK GUI LOGIN: IFRAME RELOADED");
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-                      type: 'getAuthToken',
+                      type: 'getToken',
                       data: ' '
                     }), "*");
                 }
@@ -80,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function(){
                 document.getElementById("searchText").innerHTML = ": " + message.data.searchString;
                 sendContactSearch();
             }
-            else if(message.type == "authTokenResponse") {
+            else if(message.type == "genesysAuthToken") {
                console.log("ALG *** Genesys Cloud Auth Token: " + message);
-               document.getElementById("accessToken").innerHTML = message.tokenData;
-               currentAuthToken = message.tokenData;
+               document.getElementById("accessToken").innerHTML = message.token;
+               currentAuthToken = message.token;
             }
         }
     });
