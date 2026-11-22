@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', function(){
                     const iframe = document.getElementById("softphone");
                     await handleLoginReload(iframeEnabledClientId);
                     //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
-                    console.log("FWK GUI LOGIN: IFRAME RELOADED");
-                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-                      type: 'getToken',
-                      data: ' '
-                    }), "*");
+                    //console.log("FWK GUI LOGIN: IFRAME RELOADED");
+                    //document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                    //  type: 'getToken',
+                    //  data: ' '
+                    //}), "*");
                 }
                 else if(message.data.category == "logout") {
                     hasReloadedWithClientId = false;
@@ -250,6 +250,7 @@ function executeIframeReload(ifsrc) {
     // Reassigning src works safely for both same-origin and cross-origin iframes
     const iframe = document.getElementById("softphone");
     iframe.src = ifsrc;
+    console.log("FWK GUI LOGIN: IFRAME RELOADED");
 }
 
 async function handleLoginReload(ifsrc) {
@@ -268,7 +269,13 @@ async function handleLoginReload(ifsrc) {
         permissionStatusMic.onchange = () => {
         // Trigger the reload as soon as the user clicks "Allow" or "Block"
         if (permissionStatusMic.state !== 'prompt') {
+            isReloadQueued = false;
             permissionStatusMic.onchange = null;
+            executeIframeReload(ifsrc);
+            document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                type: 'getToken',
+                data: ' '
+            }), "*");
         }
         };
         permissionStatusCam.onchange = () => {
@@ -301,10 +308,6 @@ async function handleLoginReload(ifsrc) {
            executeIframeReload(ifsrc);
         }
         */
-        if(permissionStatusMic.state !== 'prompt') {
-           isReloadQueued = false;
-           executeIframeReload(ifsrc);
-        }
         return;
    }
    } catch (err) {
