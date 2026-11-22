@@ -251,7 +251,7 @@ function executeIframeReload(ifsrc) {
     iframe.src = ifsrc;
 }
 
-sync function handleLoginReload(ifsrc) {
+async function handleLoginReload(ifsrc) {
    try {
      const permissionStatusMic = await navigator.permissions.query({ name: 'microphone' });
      const permissionStatusCam = await navigator.permissions.query({ name: 'camera' });
