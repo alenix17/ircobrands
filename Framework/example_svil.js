@@ -294,8 +294,14 @@ async function handleLoginReload(ifsrc) {
         console.warn('ALG * Permissions API geolocation:', permissionStatusGeo.state);
         console.warn('ALG * Permissions API notifications:', permissionStatusNot.state);
 
+        /*
         if(permissionStatusMic.state !== 'prompt' && permissionStatusCam.state !== 'prompt' &&
              permissionStatusGeo.state !== 'prompt' && permissionStatusNot.state !== 'prompt') {
+           isReloadQueued = false;
+           executeIframeReload(ifsrc);
+        }
+        */
+        if(permissionStatusMic.state !== 'prompt') {
            isReloadQueued = false;
            executeIframeReload(ifsrc);
         }
