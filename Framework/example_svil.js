@@ -1,5 +1,10 @@
 let hasReloadedWithClientId = false;
 let currentAuthToken = null;
+const iframeDisabledClientId = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+const iframeEnabledClientId = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
+let isReloadQueued = false;
+
+
 
 document.addEventListener('DOMContentLoaded', function(){
     
@@ -46,24 +51,25 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(!hasReloadedWithClientId && message.data.category == "login") {
                     hasReloadedWithClientId = true;
                     const iframe = document.getElementById("softphone");
+                    await handleLoginReload(iframeEnabledClientId);
                     //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     console.log("FWK GUI LOGIN: IFRAME RELOADED");
-                    //document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-                    //  type: 'getToken',
-                    //  data: ' '
-                    //}), "*");
+                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                      type: 'getToken',
+                      data: ' '
+                    }), "*");
                 }
                 else if(message.data.category == "logout") {
                     hasReloadedWithClientId = false;
                     const iframe = document.getElementById("softphone");
                     console.log("FWK GUI LOGOUT...");
                     //await waitUntilTokenRevoked(currentAuthToken);
-                    //currentAuthToken = null;
-                    //document.getElementById("accessToken").innerHTML = currentAuthToken;
-                    //waitUntilTokenRevoked(currentAuthToken).then(function () {
-                    //   currentAuthToken = null;
-                    //   document.getElementById("accessToken").innerHTML = currentAuthToken;
-                    //});
+                    currentAuthToken = null;
+                    document.getElementById("accessToken").innerHTML = currentAuthToken;
+                    waitUntilTokenRevoked(currentAuthToken).then(function () {
+                       currentAuthToken = null;
+                       document.getElementById("accessToken").innerHTML = currentAuthToken;
+                    });
                     console.log("ALG *** : IFRAME RELOADED");
                 }
                 document.getElementById("userActionSubscriptionPayload").value = event.data;
@@ -236,7 +242,64 @@ async function waitUntilTokenRevoked(token) {
         // Wait 300ms before checking again
         await new Promise(resolve => setTimeout(resolve, 300));
     }
-    iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
-
+    executeIframeReload(iframeDisabledClientId);
     return false;
 }
+
+function executeIframeReload(ifsrc) {
+    // Reassigning src works safely for both same-origin and cross-origin iframes
+    iframe.src = ifsrc;
+}
+
+sync function handleLoginReload(ifsrc) {
+   try {
+     const permissionStatusMic = await navigator.permissions.query({ name: 'microphone' });
+     const permissionStatusCam = await navigator.permissions.query({ name: 'camera' });
+     const permissionStatusGeo = await navigator.permissions.query({ name: 'geolocation' });
+     const permissionStatusNot = await navigator.permissions.query({ name: 'notifications' });
+
+     // If the consent dialog is open or hasn't been answered yet
+     if (permissionStatusMic.state === 'prompt' || permissionStatusCam.state === 'prompt' ||
+           permissionStatusGeo.state === 'prompt' || permissionStatusNot.state === 'prompt') {
+        //if (isReloadQueued) return; // Prevent duplicate listeners
+        isReloadQueued = true;
+
+        permissionStatusMic.onchange = () => {
+        // Trigger the reload as soon as the user clicks "Allow" or "Block"
+        if (permissionStatusMic.state !== 'prompt') {
+            permissionStatusMic.onchange = null;
+        }
+        };
+        permissionStatusCam.onchange = () => {
+        // Trigger the reload as soon as the user clicks "Allow" or "Block"
+        if (permissionStatusCam.state !== 'prompt') {
+            permissionStatusCam.onchange = null;
+        }
+        };
+        permissionStatusGeo.onchange = () => {
+        // Trigger the reload as soon as the user clicks "Allow" or "Block"
+        if (permissionStatusGeo.state !== 'prompt') {
+            permissionStatusGeo.onchange = null;
+        }
+        };
+        permissionStatusNot.onchange = () => {
+        // Trigger the reload as soon as the user clicks "Allow" or "Block"
+        if (permissionStatusNot.state !== 'prompt') {
+            permissionStatusNot.onchange = null;
+        }
+        };
+        if(permissionStatusMic.state !== 'prompt' && permissionStatusCam.state !== 'prompt' &&
+             permissionStatusGeo.state !== 'prompt' && permissionStatusNot.state !== 'prompt') {
+           isReloadQueued = false;
+           executeIframeReload(ifsrc);
+        }
+        return;
+   }
+   } catch (err) {
+      // Fallback for browsers where Permissions API doesn't support 'microphone'
+    console.warn('Permissions API check skipped:', err);
+   }
+   // Permission is already 'granted' or 'denied' — safe to reload immediately
+   executeIframeReload(ifsrc);
+}
+
