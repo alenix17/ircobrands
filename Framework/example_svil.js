@@ -51,13 +51,15 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(!hasReloadedWithClientId && message.data.category == "login") {
                     hasReloadedWithClientId = true;
                     const iframe = document.getElementById("softphone");
-                    await handleLoginReload(iframeEnabledClientId);
+                    //await handleLoginReload(iframeEnabledClientId);
                     //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     //console.log("FWK GUI LOGIN: IFRAME RELOADED");
-                    //document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-                    //  type: 'getToken',
-                    //  data: ' '
-                    //}), "*");
+                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                      type: 'getToken',
+                      data: ' '
+                    }), "*");
+                    console.log("FWK GUI LOGIN: IFRAME RELOADED");
+
                 }
                 else if(message.data.category == "logout") {
                     hasReloadedWithClientId = false;
