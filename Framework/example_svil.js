@@ -254,7 +254,7 @@ async function waitUntilTokenRevoked(token) {
         // Wait 300ms before checking again
         await new Promise(resolve => setTimeout(resolve, 300));
     }
-    executeIframeReload(iframeDisabledClientId);
+    //executeIframeReload(iframeDisabledClientId);
     return false;
 }
 
