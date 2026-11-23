@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function(){
             }
             else if(message.type == "authTokenResponse") {
                console.log("ALG *** Genesys Cloud Auth Token Intesa Sanpaolo Svil: " + message);
-               document.getElementById("accessToken").innerHTML = message.tokenData;
-               currentAuthToken = message.tokenData;
+               document.getElementById("accessToken").innerHTML = message.data;
+               currentAuthToken = message.data;
             }
 
         }
