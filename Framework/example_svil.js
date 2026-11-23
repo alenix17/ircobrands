@@ -54,8 +54,12 @@ document.addEventListener('DOMContentLoaded', function(){
                     //await handleLoginReload(iframeEnabledClientId);
                     //iframe.src = "https://apps.mypurecloud.de/crm/embeddableFramework.html?enableFrameworkClientId=true&dedicatedLoginWindow=true&orgName=psemeaconsulting07&provider=okta&orgName=psemeaconsulting07&target=87d3fd92-ccfa-4f4c-92a0-9779fc458b32&prompt=";
                     //console.log("FWK GUI LOGIN: IFRAME RELOADED");
+                    //document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                    //  type: 'getToken',
+                    //  data: ' '
+                    //}), "*");
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-                      type: 'getToken',
+                      type: 'getAuthToken',
                       data: ' '
                     }), "*");
                     console.log("FWK GUI LOGIN: IFRAME RELOADED");
@@ -87,6 +91,12 @@ document.addEventListener('DOMContentLoaded', function(){
                document.getElementById("accessToken").innerHTML = message.token;
                currentAuthToken = message.token;
             }
+            else if(message.type == "authTokenResponse") {
+               console.log("ALG *** Genesys Cloud Auth Token Intesa Sanpaolo Svil: " + message);
+               document.getElementById("accessToken").innerHTML = message.tokenData;
+               currentAuthToken = message.tokenData;
+            }
+
         }
     });
 
