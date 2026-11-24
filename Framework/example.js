@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     currentRecordingState = null;
                 } 
                 if(message.data.category == "change" && message.data.category.new.state == "CONNECTED") {
-                   let tempRecordingState = message.data.category.new.recordingState;
+                   let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState);
                    if(currentRecordingState != tempRecordingState) {
                       currentRecordingState = tempRecordingState;
