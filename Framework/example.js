@@ -241,7 +241,7 @@ function notifyRecordingStatus(value, flag, previous) {
               notifyType = "ERROR";
            else if(previous == "paused")
               notifyType = "WARNING";
-            var payudpate = {
+            var payupdate = {
               message: msg,
               type: notifyType,  
               timeout: notifyUpdate
