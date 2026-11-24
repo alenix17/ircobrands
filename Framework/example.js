@@ -62,15 +62,17 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(message.data.category == "disconnect" && currentRecordingState != null) {
                    notifyRecordingStatus(currentRecordingState, false, null);
                    currentRecordingState = null;
+                   displayRecordingState = false;
                 }
                 if(message.data.category == "acw" && currentRecordingState != null) {
                    notifyRecordingStatus(currentRecordingState, false, null);
                    currentRecordingState = null;
+                   displayRecordingState = false;
                 }
                 if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED" ) {
                    let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState + " Prev: " + currentRecordingState);
-                   console.log("ALG * displayRecordingState: " + displayRecordingState + " Prev: " + currentRecordingState);
+                   console.log("ALG * displayRecordingState: " + displayRecordingState + " Addr: " + message.data.interaction.new.displayAddress);
                    if(displayRecordingState == true || (message.data.interaction.new.isCallback == true && 
                                                         message.data.interaction.new.displayAddress !== "")) {
                       if(currentRecordingState != tempRecordingState) {
