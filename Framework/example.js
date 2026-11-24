@@ -1,6 +1,7 @@
 let hasReloadedWithClientId = false;
 let currentAuthToken = null;
 let currentRecordingState = null;
+let displayRecordingState = false;
 
 document.addEventListener('DOMContentLoaded', function(){
     
@@ -43,18 +44,32 @@ document.addEventListener('DOMContentLoaded', function(){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
                 if(message.data.category == "connect") {
+                    if(message.data.interaction.isCallback || message.data.interaction.isEmail ||
+                        message.data.interaction.isMessage || message.data.interaction.isChat || message.data.interaction.isVoicemail) {
+                       displayRecordingState = false;
+                       return;
+                    }
+                    else {
+                       displayRecordingState = true;
+                    }    
                     let convId = message.data.interaction.id;
                     currentRecordingState = message.data.interaction.recordingState;
                     notifyRecordingStatus(currentRecordingState, true, null);
                     await MakeGetConversationDetails(currentAuthToken, convId);
                 } 
-                if(message.data.category == "disconnect") {
+                if(message.data.category == "disconnect" && currentRecordingState != null) {
+                   notifyRecordingStatus(currentRecordingState, false, null);
+                   currentRecordingState = null;
+                }
+                if(message.data.category == "acw" && currentRecordingState != null) {
                    notifyRecordingStatus(currentRecordingState, false, null);
                    currentRecordingState = null;
                 }
                 if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED") {
                    let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState + " Prev: " + currentRecordingState);
+                   console.log("ALG * isCallback: " + tempRecordingState + " Prev: " + currentRecordingState);
+
                    if(currentRecordingState != tempRecordingState) {
                       notifyRecordingStatus(tempRecordingState, true, currentRecordingState);
                       currentRecordingState = tempRecordingState;
