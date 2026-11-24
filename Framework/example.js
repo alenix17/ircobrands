@@ -44,15 +44,20 @@ document.addEventListener('DOMContentLoaded', function(){
                 console.log("FWK: " + event.data);
                 if(message.data.category == "connect") {
                     let convId = message.data.interaction.id;
+                    currentRecordingState = message.data.interaction.recordingState;
+                    notifyRecordingStatus(currentRecordingState, true);
                     await MakeGetConversationDetails(currentAuthToken, convId);
-                    currentRecordingState = null;
                 } 
+                if(message.data.category == "disconnect") {
+                   notifyRecordingStatus(currentRecordingState, false);
+                   currentRecordingState = null;
+                }
                 if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED") {
                    let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState);
                    if(currentRecordingState != tempRecordingState) {
                       currentRecordingState = tempRecordingState;
-                      notifyRecordingStatus(currentRecordingState);
+                      notifyRecordingStatus(currentRecordingState, true);
                    }
                 }
             } else if(message.type == "userActionSubscription"){
@@ -224,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 })
 
-function notifyRecordingStatus(value) {
+function notifyRecordingStatus(value, flag) {
         let notifyType = "WARNING";
         let notifyTimeout = "10000";
         let msg = "Recording is " + value;
@@ -232,6 +237,9 @@ function notifyRecordingStatus(value) {
         if(value == "active") {
             notifyType = "SUCCESS";
             notifyTimeout = "0";
+        }
+        if(flag == false) {
+           notifyTimeout = "1000";
         }
         
         var payload = {
