@@ -227,10 +227,10 @@ async function MakeGetConversationDetails(token, conversationId)
             }
         });
         if(response.status == 200) {
-           console.warn("ALG GetConversationDetails:\n" + JSON.stringfy(response.json()));
+           console.warn("ALG GetConversationDetails:\n" + JSON.stringify(response.json()));
         }
         else {
-           console.warn("ALG GetConversationDetails error:\n" + response.text());
+           console.warn("ALG GetConversationDetails error:\n" + JSON.stringify(response.text()));
         }
     }
     catch(err) {
