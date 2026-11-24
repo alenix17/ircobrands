@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function(){
             } else if(message.type == "interactionSubscription"){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
-                if(event.data.data.category == "connect") {
-                    let convId = event.data.data.category.interaction.id;
+                if(message.data.category == "connect") {
+                    let convId = message.data.category.interaction.id;
                     await MakeGetConversationDetails(currentAuthToken, convId);
                 }
             } else if(message.type == "userActionSubscription"){
