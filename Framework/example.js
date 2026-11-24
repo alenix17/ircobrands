@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     await MakeGetConversationDetails(currentAuthToken, convId);
                     currentRecordingState = null;
                 } 
-                if(message.data.category == "change" && message.data.category.new.state == "CONNECTED") {
+                if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED") {
                    let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState);
                    if(currentRecordingState != tempRecordingState) {
