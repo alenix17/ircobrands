@@ -214,6 +214,28 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 })
 
+function notifyRecordingStatus(value, timeout) {
+        let notifyType = "WARNING";
+        let notifyTimeout = "10000";
+        let msg = "Recording is " + value;
+       
+        if(value == "active") {
+            notifyType = "SUCCESS";
+            notifyTimeout = "0";
+        }
+        
+        var payload = {
+            message: msg,
+            type: notifyType,  
+            timeout: notifyTimeout
+        };
+        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+            type: 'sendCustomNotification',
+            data: payload
+        }), "*");
+    }
+}
+
 async function MakeGetConversationDetails(token, conversationId)
 {
     const checkUrl = "https://api.mypurecloud.de/api/v2/analytics/conversations/" + conversationId + "/details";
