@@ -226,7 +226,7 @@ async function MakeGetConversationDetails(token, conversationId)
                 "Content-Type": "application/json"
             }
         });
-        if(response.status == 200) {
+        if(response.status === 200) {
            console.warn("ALG GetConversationDetails:\n" + JSON.stringify(response.json()));
         }
         else {
