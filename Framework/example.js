@@ -217,8 +217,9 @@ document.addEventListener('DOMContentLoaded', function(){
 async function MakeGetConversationDetails(token, conversationId)
 {
     const checkUrl = "https://api.mypurecloud.de/api/v2/analytics/conversations/" + conversationId + "/details";
+    let response = null;
     try {
-        const response = await fetch(checkUrl, {
+        response = await fetch(checkUrl, {
             method: "GET",
             headers: {
                 "Host": "api.mypurecloud.de",
@@ -226,8 +227,8 @@ async function MakeGetConversationDetails(token, conversationId)
                 "Content-Type": "application/json"
             }
         });
-        let ret = JSON.parse(response.text());
-        console.warn("ALG rawret:" + ret);
+        let ret = await response.json();
+        console.warn("ALG rawret:" + JSON.stringify(ret));
 
         if(response.status === 200) {
            console.warn("ALG GetConversationDetails:\n" + JSON.stringify(ret));
