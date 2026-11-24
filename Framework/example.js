@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED") {
                    let tempRecordingState = message.data.interaction.new.recordingState;
-                   console.log("ALG * RecordingState: " + tempRecordingState + "prev: " + currentRecordingState);
+                   console.log("ALG * RecordingState: " + tempRecordingState + " Prev: " + currentRecordingState);
                    if(currentRecordingState != tempRecordingState) {
                       notifyRecordingStatus(tempRecordingState, true, currentRecordingState);
                       currentRecordingState = tempRecordingState;
