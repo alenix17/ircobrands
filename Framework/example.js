@@ -45,19 +45,19 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(message.data.category == "connect") {
                     let convId = message.data.interaction.id;
                     currentRecordingState = message.data.interaction.recordingState;
-                    notifyRecordingStatus(currentRecordingState, true);
+                    notifyRecordingStatus(currentRecordingState, true, null);
                     await MakeGetConversationDetails(currentAuthToken, convId);
                 } 
                 if(message.data.category == "disconnect") {
-                   notifyRecordingStatus(currentRecordingState, false);
+                   notifyRecordingStatus(currentRecordingState, false, null);
                    currentRecordingState = null;
                 }
                 if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED") {
                    let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState);
                    if(currentRecordingState != tempRecordingState) {
+                      notifyRecordingStatus(tempRecordingState, true, currentRecordingState);
                       currentRecordingState = tempRecordingState;
-                      notifyRecordingStatus(currentRecordingState, true);
                    }
                 }
             } else if(message.type == "userActionSubscription"){
@@ -229,12 +229,38 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 })
 
-function notifyRecordingStatus(value, flag) {
+function notifyRecordingStatus(value, flag, previous) {
         let notifyType = "WARNING";
         let notifyTimeout = "10000";
+        let notifyUpdate = "1000";
         let msg = "Recording is " + value;
-       
-        if(value == "active") {
+
+        if(previous!= null && flag!= false && previous != "active") {
+           msg = "Recording is " + previous;
+           if(previous == "none")
+              notifyType = "ERROR";
+           else if(previous == "paused")
+              notifyType = "WARNING";
+            var payudpate = {
+              message: msg,
+              type: notifyType,  
+              timeout: notifyUpdate
+            };
+            document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+              type: 'sendCustomNotification',
+              data: payupdate
+            }), "*");
+        }
+    
+        if(value == "none") {
+           notifyType = "ERROR";
+           notifyTimeout "0";
+        }
+        else if(value == "paused") {
+           notifyType = "WARNING";
+           notifyTimeout = 0;
+        }
+        else if(value == "active") {
             notifyType = "SUCCESS";
             notifyTimeout = "0";
         }
