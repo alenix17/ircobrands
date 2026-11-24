@@ -233,14 +233,16 @@ function notifyRecordingStatus(value, flag, previous) {
         let notifyType = "WARNING";
         let notifyTimeout = "10000";
         let notifyUpdate = "1000";
-        let msg = "Recording is " + value;
+        let msg;
 
-        if(previous!= null && flag!= false && previous != "active") {
+        if(previous!= null && flag!= false) {
            msg = "Recording is " + previous;
            if(previous == "none")
               notifyType = "ERROR";
            else if(previous == "paused")
               notifyType = "WARNING";
+           else if(previouse == "active") 
+              notifyType = "SUCCESS";
             var payupdate = {
               message: msg,
               type: notifyType,  
@@ -251,7 +253,8 @@ function notifyRecordingStatus(value, flag, previous) {
               data: payupdate
             }), "*");
         }
-    
+
+        msg = "Recording is " + value;
         if(value == "none") {
            notifyType = "ERROR";
            notifyTimeout = "0";
