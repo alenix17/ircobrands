@@ -226,11 +226,14 @@ async function MakeGetConversationDetails(token, conversationId)
                 "Content-Type": "application/json"
             }
         });
+        let ret = JSON.parse(response.text());
+        console.warn("ALG rawret:" + ret);
+
         if(response.status === 200) {
-           console.warn("ALG GetConversationDetails:\n" + JSON.stringify(response.json()));
+           console.warn("ALG GetConversationDetails:\n" + JSON.stringify(ret));
         }
         else {
-           console.warn("ALG GetConversationDetails error:\n" + JSON.stringify(response.json()));
+           console.warn("ALG GetConversationDetails error:\n" + JSON.stringify(ret));
         }
     }
     catch(err) {
