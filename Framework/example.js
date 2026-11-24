@@ -221,12 +221,16 @@ async function MakeGetConversationDetails(token, conversationId)
         const response = await fetch(checkUrl, {
             method: "GET",
             headers: {
+                "Host": "api.mypurecloud.de",
                 "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             }
         });
         if(response.status == 200) {
            console.warn("ALG GetConversationDetails:\n" + JSON.stringfy(response.json()));
+        }
+        else {
+           console.warn("ALG GetConversationDetails error:\n" + response.text()):
         }
     }
     catch(err) {
