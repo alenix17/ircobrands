@@ -254,7 +254,7 @@ function notifyRecordingStatus(value, flag, previous) {
     
         if(value == "none") {
            notifyType = "ERROR";
-           notifyTimeout "0";
+           notifyTimeout = "0";
         }
         else if(value == "paused") {
            notifyType = "WARNING";
