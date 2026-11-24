@@ -1,5 +1,6 @@
 let hasReloadedWithClientId = false;
 let currentAuthToken = null;
+let currentRecordingState = null;
 
 document.addEventListener('DOMContentLoaded', function(){
     
@@ -44,7 +45,16 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(message.data.category == "connect") {
                     let convId = message.data.interaction.id;
                     await MakeGetConversationDetails(currentAuthToken, convId);
-                }              
+                    currentRecordingState = null;
+                } 
+                if(message.data.category == "change" && message.data.category.new.state == "CONNECTED") {
+                   let tempRecordingState = message.data.category.new.recordingState;
+                   console.log("ALG * RecordingState: " + tempRecordingState);
+                   if(currentRecordingState != tempRecordingState) {
+                      currentRecordingState = tempRecordingState;
+                      notifyRecordingStatus(currentRecordingState);
+                   }
+                }
             } else if(message.type == "userActionSubscription"){
                 if(!hasReloadedWithClientId && message.data.category == "login") {
                     hasReloadedWithClientId = true;
@@ -214,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 })
 
-function notifyRecordingStatus(value, timeout) {
+function notifyRecordingStatus(value) {
         let notifyType = "WARNING";
         let notifyTimeout = "10000";
         let msg = "Recording is " + value;
