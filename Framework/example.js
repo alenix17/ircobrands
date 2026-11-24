@@ -243,8 +243,8 @@ function notifyRecordingStatus(value) {
             type: 'sendCustomNotification',
             data: payload
         }), "*");
-    }
 }
+
 
 async function MakeGetConversationDetails(token, conversationId)
 {
