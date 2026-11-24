@@ -230,7 +230,7 @@ async function MakeGetConversationDetails(token, conversationId)
            console.warn("ALG GetConversationDetails:\n" + JSON.stringfy(response.json()));
         }
         else {
-           console.warn("ALG GetConversationDetails error:\n" + response.text()):
+           console.warn("ALG GetConversationDetails error:\n" + response.text());
         }
     }
     catch(err) {
