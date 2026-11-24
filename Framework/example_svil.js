@@ -236,16 +236,22 @@ document.addEventListener('DOMContentLoaded', function(){
 async function MakeGetConversationDetails(token, conversationId)
 {
     const checkUrl = "https://api.mypurecloud.de/api/v2/analytics/conversations/" + conversationId + "/details";
+    let response = null;
     try {
-        const response = await fetch(checkUrl, {
+        response = await fetch(checkUrl, {
             method: "GET",
             headers: {
+                "Host": "api.mypurecloud.de",
                 "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             }
         });
-        if(response.status == 200) {
-           console.warn("ALG GetConversationDetails:\n" + JSON.stringfy(response.json()));
+        let ret = await response.json();
+        if(response.status === 200) {
+           console.warn("ALG GetConversationDetails:\n" + JSON.stringify(ret));
+        }
+        else {
+           console.warn("ALG GetConversationDetails error:\n" + JSON.stringify(ret));
         }
     }
     catch(err) {
