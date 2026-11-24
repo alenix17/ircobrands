@@ -228,8 +228,6 @@ async function MakeGetConversationDetails(token, conversationId)
             }
         });
         let ret = await response.json();
-        console.warn("ALG rawret:" + JSON.stringify(ret));
-
         if(response.status === 200) {
            console.warn("ALG GetConversationDetails:\n" + JSON.stringify(ret));
         }
