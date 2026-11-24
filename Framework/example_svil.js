@@ -47,6 +47,10 @@ document.addEventListener('DOMContentLoaded', function(){
             } else if(message.type == "interactionSubscription"){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
+                if(event.data.data.category == "connect") {
+                    let convId = event.data.data.category.interaction.id;
+                    await MakeGetConversationDetails(currentAuthToken, convId);
+                }
             } else if(message.type == "userActionSubscription"){
                 if(!hasReloadedWithClientId && message.data.category == "login") {
                     hasReloadedWithClientId = true;
@@ -228,6 +232,27 @@ document.addEventListener('DOMContentLoaded', function(){
         }), "*");
     }
 })
+
+async function MakeGetConversationDetails(token, conversationId)
+{
+    const checkUrl = "https://api.mypurecloud.de/api/v2/analytics/conversations/" + conversationId + "/details";
+    try {
+        const response = await fetch(checkUrl, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        });
+        if(response.status == 200) {
+           console.warn("ALG GetConversationDetails:\n" + JSON.stringfy(response.json()));
+        }
+    }
+    catch(err) {
+        console.warn("ALG GetConversationDetails: " + response.statusText);
+    }
+    return;
+}
 
 async function waitUntilTokenRevoked(token) {
     const checkUrl = "https://api.mypurecloud.de/api/v2/tokens/me";
