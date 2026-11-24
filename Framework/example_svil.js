@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
                 if(message.data.category == "connect") {
-                    let convId = message.data.category.interaction.id;
+                    let convId = message.data.interaction.id;
                     await MakeGetConversationDetails(currentAuthToken, convId);
                 }
             } else if(message.type == "userActionSubscription"){
