@@ -44,8 +44,10 @@ document.addEventListener('DOMContentLoaded', function(){
                 document.getElementById("interactionSubscriptionPayload").value = event.data
                 console.log("FWK: " + event.data);
                 if(message.data.category == "connect") {
-                    if(message.data.interaction.isCallback || message.data.interaction.isEmail ||
-                        message.data.interaction.isMessage || message.data.interaction.isChat || message.data.interaction.isVoicemail) {
+                    if(message.data.interaction.isCallback == true || message.data.interaction.isEmail == true ||
+                        message.data.interaction.isMessage == true || message.data.interaction.isChat == true || 
+                        message.data.interaction.isVoicemail == true||
+                        message.data.interaction.isInternal == true) {
                        displayRecordingState = false;
                        return;
                     }
@@ -65,14 +67,16 @@ document.addEventListener('DOMContentLoaded', function(){
                    notifyRecordingStatus(currentRecordingState, false, null);
                    currentRecordingState = null;
                 }
-                if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED") {
+                if(message.data.category == "change" && message.data.interaction.new.state == "CONNECTED" ) {
                    let tempRecordingState = message.data.interaction.new.recordingState;
                    console.log("ALG * RecordingState: " + tempRecordingState + " Prev: " + currentRecordingState);
-                   console.log("ALG * isCallback: " + tempRecordingState + " Prev: " + currentRecordingState);
-
-                   if(currentRecordingState != tempRecordingState) {
-                      notifyRecordingStatus(tempRecordingState, true, currentRecordingState);
-                      currentRecordingState = tempRecordingState;
+                   console.log("ALG * displayRecordingState: " + displayRecordingState + " Prev: " + currentRecordingState);
+                   if(displayRecordingState == true || (message.data.interaction.new.isCallback == true && 
+                                                        message.data.interaction.new.displayAddress !== "")) {
+                      if(currentRecordingState != tempRecordingState) {
+                         notifyRecordingStatus(tempRecordingState, true, currentRecordingState);
+                         currentRecordingState = tempRecordingState;
+                      }
                    }
                 }
             } else if(message.type == "userActionSubscription"){
