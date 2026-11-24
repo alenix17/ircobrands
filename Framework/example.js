@@ -241,7 +241,7 @@ function notifyRecordingStatus(value, flag, previous) {
               notifyType = "ERROR";
            else if(previous == "paused")
               notifyType = "WARNING";
-           else if(previouse == "active") 
+           else if(previous == "active") 
               notifyType = "SUCCESS";
             var payupdate = {
               message: msg,
