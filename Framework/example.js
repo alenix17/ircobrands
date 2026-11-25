@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function(){
                 if(message.data.category == "connect") {
                     if(message.data.interaction.isCallback == true || message.data.interaction.isEmail == true ||
                         message.data.interaction.isMessage == true || message.data.interaction.isChat == true || 
-                        message.data.interaction.isVoicemail == true||
-                        message.data.interaction.isInternal == true) {
+                        message.data.interaction.isVoicemail == true ) {
+                        //|| message.data.interaction.isInternal == true) {
                        displayRecordingState = false;
                        return;
                     }
